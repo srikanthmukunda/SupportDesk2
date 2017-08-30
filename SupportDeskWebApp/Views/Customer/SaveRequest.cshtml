@@ -1,0 +1,28 @@
+﻿@model SupportDeskWebApp.Models.Ticket
+
+
+@using (Html.BeginForm("SaveRequest", "Customer", FormMethod.Post, new { id = "popupForm" }))
+{
+    if (Model != null && Model.IncidentID > 0)
+    {
+        @Html.HiddenFor(a => a.IncidentID)
+    }
+    <div class="form-group">
+        <label>Title</label>
+        @Html.TextBoxFor(a => a.TicketTitle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.TicketTitle,null, new { @style = "color:red;" })
+    </div>
+    <div class="form-group">
+        <label>User Query</label>
+        @Html.TextAreaFor(a => a.UserQuery, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.UserQuery,null, new { @style = "color:red;" })
+    </div>
+    <div class="form-group">
+        <label>Application</label>        
+        @Html.DropDownListFor(a => a.ApplicationID, new SelectList(ViewBag.ApplicationList, "ApplicationId", "Application1"), "--Type/Dragdown--", htmlAttributes: new { @name = "applicationId", @class = "form-control", @id = "applicationId", @ng_model = "applicationId" })
+        @Html.ValidationMessageFor(a => a.ApplicationID, null, new { @style = "color:red;" })
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}

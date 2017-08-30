@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Support Desk</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    
+    <style type="text/css">
+        body {
+            background-color: #C9D7E0;
+        }
+
+        .Grid thead a {
+            color: antiquewhite;
+        }
+
+            .Grid thead a:hover {
+                color: lightblue;
+            }
+
+        .text-box {
+            background-color: antiquewhite;
+            color: maroon;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .logo {
+            color: #CCC;
+        }
+
+        .option {
+            padding-bottom: 3px;
+            margin: unset;
+            border-bottom: unset;
+            padding-top: 15px;
+            padding-left: 20px;
+            padding-right: 10px;
+        }
+
+        .page-header {
+            padding-bottom: 3px;
+            margin: unset;
+            border-bottom: unset;
+        }
+
+            .page-header a {
+                color: lightblue;
+            }
+
+                .page-header a:hover {
+                    color: lightseagreen;
+                    text-decoration: none;
+                }
+
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 35px;
+            background-color: #355667;
+            text-align: center;
+        }
+    </style>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#307B94;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                @*<b>@Html.ActionLink("Quick Service", "ViewDashboard", "Staff", new { area = "" }, new { @class = "navbar-brand" })</b>*@
+                <div class="page-header">
+                    <h2 class="logo"><a href="@Url.Action("Index", "Assignee")">Quick Service </a></h2>
+                </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="option"><h4 class="logo"><a href="@Url.Action("Index", "Assignee")">Dashboard </a></h4></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="option"><h4 class="logo"><a href="@Url.Action("Requests", "Assignee")">Completed Jobs </a></h4></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @if (Session["LoginId"] != null)
+                        {
+                            @Html.ActionLink("Log Out", "LogOut", "Login", new { area = "" }, new { @class = "navbar-brand navbar-right" });
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container body-content">
+        <br />
+        <br />
+
+        @RenderBody()
+        
+
+        <br />
+
+        <footer class="navbar navbar-fixed-bottom navbar-light bg-faded" id="footer">
+            <br />
+            <p>&copy; @DateTime.Now.Year - Support Desk</p>
+
+        </footer>
+    </div>
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <style type="text/css">
+        .navbar-brand, .nav-defined-by-us {
+            color: #959B9D !important;
+        }
+
+            .navbar-brand:hover, .nav-defined-by-us:hover {
+                color: yellowgreen !important;
+            }
+    </style>
+    @RenderSection("Scripts", false)
+</body>
+</html>

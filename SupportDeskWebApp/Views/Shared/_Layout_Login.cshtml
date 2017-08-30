@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Support Desk</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <style type="text/css">
+        body {
+            
+            background-color: #C9D7E0;
+            /*background-image: url('../../img/HomeImg.jpg');*/
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top;
+            height: 100%;
+        }
+
+        .Grid thead a {
+            color: antiquewhite;
+        }
+
+            .Grid thead a:hover {
+                color: lightblue;
+            }
+
+        .text-box {
+            background-color: antiquewhite;
+            color: maroon;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .logo {
+            color: #CCC;
+        }
+
+        .page-header {
+            padding-bottom: 3px;
+            margin: unset;
+            border-bottom: unset;
+        }
+
+            .page-header a {
+                color: lightblue;
+            }
+
+                .page-header a:hover {
+                    color: lightseagreen;
+                    text-decoration: none;
+                }
+
+        #login-dp {
+            min-width: 250px;
+            padding: 14px 14px 0;
+            overflow: hidden;
+            background-color: rgba(255,255,255,.8);
+        }
+
+            #login-dp .help-block {
+                font-size: 12px;
+            }
+
+            #login-dp .bottom {
+                background-color: rgba(255,255,255,.8);
+                border-top: 1px solid #ddd;
+                clear: both;
+                padding: 14px;
+            }
+
+            #login-dp .form-group {
+                margin-bottom: 10px;
+            }
+        /* Wrapper for page content to push down footer */
+        #wrap {
+            min-height: 100%;
+            height: auto;
+            /* Negative indent footer by its height */
+            margin: 0 auto -60px;
+            /* Pad bottom by footer height */
+            padding: 0 0 60px;
+        }
+
+        /* Set the fixed height of the footer here */
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 65px;
+            background-color: #355667;
+            text-align: center;
+        }
+    </style>
+
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#307B94;">
+        <div class="container">
+            <div class="navbar-header">
+                @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>*@
+                <div class="page-header">
+                    <h2 class="logo"><a href="@Url.Action("Index", "Login")">Support Desk! </a><small>  Welcome to our place!</small></h2>
+                </div>
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            @*<div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>*@
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Log In</b> <span class="caret"></span></a>
+                    <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @using (Html.BeginForm())
+                                    {
+                                        <h4>Provide Credential</h4>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="LoginId" placeholder="User Id" required="" autofocus="" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control" name="password" placeholder="Password" required="" />
+                                                </div>
+                                                <h5>new user! Sign Up now. </h5>
+                                                <div class="form-group">
+                                                    <button class="btn btn-success" type="submit">Log In</button>
+                                                </div>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+
+        
+        <hr />
+        <footer class="navbar navbar-fixed-bottom navbar-light bg-faded" id="footer">
+            <br />
+            <p>&copy; @DateTime.Now.Year - SupportDesk</p>
+        </footer>
+    </div>
+
+   @RenderSection("Scripts", required: false)
+</body>
+</html>

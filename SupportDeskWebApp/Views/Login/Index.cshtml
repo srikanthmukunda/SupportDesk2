@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+@section Scripts{
+<script type="text/javascript">
+        $(document).ready(function () {
+            var msg = $('#viewbagmsg').val();
+            if (msg != '') {
+                alert(msg);
+            }
+        });
+        function checkExistingEmailId() {
+            var emailId = $('#UserEmailId').val();
+            $.ajax({
+                url: '@Url.Action("CheckValidEmailId", "Login")',
+                data: { EmailId: emailId },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var emailIdElement = document.getElementById('UserEmailId');
+                    if (data == 'True') {
+                        emailIdElement.setCustomValidity("");
+                    }
+                    else if (data == 'False') {
+                        alert("Already existing user");
+                        emailIdElement.setCustomValidity("Already existing user");
+                    }
+                },
+                error: function (response) {
+                    alert("Some error occured");
+                }
+            });
+        }
+        function emailIdMatch() {
+            var emailId1 = $('#UserEmailId').val();
+            var emailId2 = $('#ConfirmUserEmailId').val();
+            var confirmEmailIdElement = document.getElementById('ConfirmUserEmailId');
+            if (emailId1 == emailId2) {
+                confirmEmailIdElement.setCustomValidity('');
+            }
+            else {
+                confirmEmailIdElement.setCustomValidity('Email Ids do not match');
+            }
+        }
+        function passwordMatch() {
+            var password1 = $('#UserPassword').val();
+            var password2 = $('#ConfirmUserPassword').val();
+            var confirmEmailIdElement = document.getElementById('ConfirmUserPassword');
+            if (password1 == password2) {
+                confirmEmailIdElement.setCustomValidity('');
+            }
+            else {
+                confirmEmailIdElement.setCustomValidity('Passwords do not match');
+            }
+        }
+
+</script>
+
+
+}
+
+@using (Html.BeginForm())
+{
+    <div class="wrapper">
+        <div class="container">
+            <div class="row" style="margin:10px; padding:10px;">
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3><b>Sign Up</b></h3>
+                    <h4>We are avalible 24x7 to support you.</h4>
+                    @using (Html.BeginForm())
+                {
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="UserName" placeholder="First Name" required="" autofocus="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="MiddleName" placeholder="Middle Name" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="LastName" placeholder="Last Name" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Gender" placeholder="Gender: Male/Female" />
+                        </div>
+                        <div class="form-group">
+                            @Html.TextArea("Address", new { @class = "form-control", @placeholder = "Address" })
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="GovernmentID" placeholder="GovernmentID" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Mobile" placeholder="Mobile No:" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Mobile2" placeholder="Secondary Mobile No:" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Landline" placeholder="Landline No:" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="UserEmailId" id="UserEmailId" placeholder="Email Id" required="" onchange="checkExistingEmailId();" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="ConfirmUserEmailId" id="ConfirmUserEmailId" placeholder="Re-enter Email Id" required="" onchange="emailIdMatch();" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="UserPassword" id="UserPassword" placeholder="Password" required="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="ConfirmUserPassword" id="ConfirmUserPassword" placeholder="Re-enter Password" required="" onchange="passwordMatch();" />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Creat an Account</button>
+                        </div>
+
+
+                        }
+                            @Html.Hidden("viewbagmsg", (string)ViewBag.Msg)
+                        </div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,699 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="SupportDeskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="FirstName" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="MiddleName" MaxLength="50" Type="varchar" />
+          <Property Name="LastName" MaxLength="50" Type="varchar" />
+          <Property Name="Gender" MaxLength="100" Type="varchar" />
+          <Property Name="Address" MaxLength="500" Type="varchar" />
+          <Property Name="GovernmentID" MaxLength="100" Type="varchar" />
+          <Property Name="JoinDate" MaxLength="100" Type="varchar" />
+          <Property Name="MobileNumber" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="SecondaryMobileNumber" MaxLength="100" Type="varchar" />
+          <Property Name="LandlineNumber" MaxLength="100" Type="varchar" />
+          <Property Name="Email" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="AgentId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Password" Nullable="false" MaxLength="30" Type="varchar" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="Application" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="Description" MaxLength="500" Type="varchar" />
+          <Property Name="ApplicationId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+        </EntityType>
+        <EntityType Name="Assignee">
+          <Key>
+            <PropertyRef Name="AssigneeID" />
+          </Key>
+          <Property Name="AssigneeID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="AssigneeName" MaxLength="50" Type="nvarchar" />
+          <Property Name="Password" Nullable="false" MaxLength="30" Type="varchar" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="FirstName" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="MiddleName" MaxLength="50" Type="varchar" />
+          <Property Name="LastName" MaxLength="50" Type="varchar" />
+          <Property Name="Gender" MaxLength="100" Type="varchar" />
+          <Property Name="Address" MaxLength="500" Type="varchar" />
+          <Property Name="GovernmentID" MaxLength="100" Type="varchar" />
+          <Property Name="JoinDate" Type="datetime" />
+          <Property Name="MobileNumber" Type="int" />
+          <Property Name="SecondaryMobileNumber" MaxLength="100" Type="varchar" />
+          <Property Name="LandlineNumber" MaxLength="100" Type="varchar" />
+          <Property Name="Email" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="CustomerID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Password" MaxLength="30" Type="varchar" />
+        </EntityType>
+        <EntityType Name="Exception">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="Exception" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="Description" MaxLength="500" Type="varchar" />
+          <Property Name="ExceptionID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+        </EntityType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" />
+          <Property Name="Feature" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="Description" MaxLength="500" Type="varchar" />
+          <Property Name="FeatureID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleName" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="RoleOnwerID" Type="int" />
+          <Property Name="RoleDescription" MaxLength="500" Type="varchar" />
+          <Property Name="RoleID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="Status" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="Description" MaxLength="500" Type="varchar" />
+          <Property Name="StatusID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="principal_id" Nullable="false" Type="int" />
+          <Property Name="diagram_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="IncidentID" />
+          </Key>
+          <Property Name="TicketTitle" Nullable="false" MaxLength="1000" Type="varchar" />
+          <Property Name="StatusID" Nullable="false" Type="int" />
+          <Property Name="Assignee" MaxLength="100" Type="varchar" />
+          <Property Name="AssigneeID" Nullable="false" Type="int" />
+          <Property Name="SubmitDateTime" MaxLength="100" Type="varchar" />
+          <Property Name="UserQuery" Nullable="false" MaxLength="8000" Type="varchar" />
+          <Property Name="FeatureID" Type="int" />
+          <Property Name="UserFullName" MaxLength="100" Type="varchar" />
+          <Property Name="CustomerID" Nullable="false" Type="int" />
+          <Property Name="Email" MaxLength="100" Type="varchar" />
+          <Property Name="ApplicationID" Nullable="false" Type="int" />
+          <Property Name="IncidentID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+        </EntityType>
+        <EntityType Name="TicketsDUMP">
+          <Key>
+            <PropertyRef Name="IncidentId" />
+          </Key>
+          <Property Name="IncidentId" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="TicketTitle" Nullable="false" MaxLength="1000" Type="varchar" />
+          <Property Name="Status" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="Assignee" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="SubmitDateTime" MaxLength="100" Type="varchar" />
+          <Property Name="Date" MaxLength="100" Type="varchar" />
+          <Property Name="FiscalMonth" MaxLength="100" Type="varchar" />
+          <Property Name="UserQuery" Nullable="false" MaxLength="8000" Type="varchar" />
+          <Property Name="WhatAskGMMFeatureDoesYourQuestionPertainTo?" MaxLength="100" Type="varchar" />
+          <Property Name="UserFullName" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="Email" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="ApplicationName" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="LastModifiedDate" MaxLength="100" Type="varchar" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserType" Nullable="false" MaxLength="100" Type="varchar" />
+          <Property Name="UserTypeID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+        </EntityType>
+        <Association Name="FK_Feature_Application">
+          <End Type="Self.Application" Multiplicity="0..1" Role="Application" />
+          <End Type="Self.Feature" Multiplicity="*" Role="Feature" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Feature">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Application">
+          <End Type="Self.Application" Multiplicity="1" Role="Application" />
+          <End Type="Self.Ticket" Multiplicity="*" Role="Ticket" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Assignee">
+          <End Type="Self.Assignee" Multiplicity="1" Role="Assignee" />
+          <End Type="Self.Ticket" Multiplicity="*" Role="Ticket" />
+          <ReferentialConstraint>
+            <Principal Role="Assignee">
+              <PropertyRef Name="AssigneeID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="AssigneeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Customer">
+          <End Type="Self.Customer" Multiplicity="1" Role="Customer" />
+          <End Type="Self.Ticket" Multiplicity="*" Role="Ticket" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Feature">
+          <End Type="Self.Feature" Multiplicity="0..1" Role="Feature" />
+          <End Type="Self.Ticket" Multiplicity="*" Role="Ticket" />
+          <ReferentialConstraint>
+            <Principal Role="Feature">
+              <PropertyRef Name="FeatureID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Status1">
+          <End Type="Self.Status" Multiplicity="1" Role="Status" />
+          <End Type="Self.Ticket" Multiplicity="*" Role="Ticket" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SupportDeskModelStoreContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assignee" EntityType="Self.Assignee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exception" EntityType="Self.Exception" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketsDUMP" EntityType="Self.TicketsDUMP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Feature_Application" Association="Self.FK_Feature_Application">
+            <End EntitySet="Application" Role="Application" />
+            <End EntitySet="Feature" Role="Feature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Application" Association="Self.FK_Ticket_Application">
+            <End EntitySet="Application" Role="Application" />
+            <End EntitySet="Ticket" Role="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Assignee" Association="Self.FK_Ticket_Assignee">
+            <End EntitySet="Assignee" Role="Assignee" />
+            <End EntitySet="Ticket" Role="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Customer" Association="Self.FK_Ticket_Customer">
+            <End EntitySet="Customer" Role="Customer" />
+            <End EntitySet="Ticket" Role="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Feature" Association="Self.FK_Ticket_Feature">
+            <End EntitySet="Feature" Role="Feature" />
+            <End EntitySet="Ticket" Role="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Status1" Association="Self.FK_Ticket_Status1">
+            <End EntitySet="Status" Role="Status" />
+            <End EntitySet="Ticket" Role="Ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SupportDeskModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="GovernmentID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="JoinDate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SecondaryMobileNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LandlineNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="Application1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Features" Relationship="Self.FK_Feature_Application" FromRole="Application" ToRole="Feature" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_Application" FromRole="Application" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Assignee">
+          <Key>
+            <PropertyRef Name="AssigneeID" />
+          </Key>
+          <Property Name="AssigneeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssigneeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_Assignee" FromRole="Assignee" ToRole="Ticket" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="GovernmentID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="JoinDate" Type="DateTime" Precision="3" />
+          <Property Name="MobileNumber" Type="Int32" />
+          <Property Name="SecondaryMobileNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LandlineNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_Customer" FromRole="Customer" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Exception">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="Exception1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ExceptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Int32" />
+          <Property Name="Feature1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FeatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_Feature_Application" FromRole="Feature" ToRole="Application" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_Feature" FromRole="Feature" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleOnwerID" Type="Int32" />
+          <Property Name="RoleDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="Status1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_Status1" FromRole="Status" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="IncidentID" />
+          </Key>
+          <Property Name="TicketTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="Assignee" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AssigneeID" Type="Int32" Nullable="false" />
+          <Property Name="SubmitDateTime" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserQuery" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FeatureID" Type="Int32" />
+          <Property Name="UserFullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" />
+          <Property Name="IncidentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_Ticket_Application" FromRole="Ticket" ToRole="Application" />
+          <NavigationProperty Name="Assignee1" Relationship="Self.FK_Ticket_Assignee" FromRole="Ticket" ToRole="Assignee" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Ticket_Customer" FromRole="Ticket" ToRole="Customer" />
+          <NavigationProperty Name="Feature" Relationship="Self.FK_Ticket_Feature" FromRole="Ticket" ToRole="Feature" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Ticket_Status1" FromRole="Ticket" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="TicketsDUMP">
+          <Key>
+            <PropertyRef Name="IncidentId" />
+          </Key>
+          <Property Name="IncidentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TicketTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Assignee" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubmitDateTime" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FiscalMonth" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserQuery" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WhatAskGMMFeatureDoesYourQuestionPertainTo_" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserFullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApplicationName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserType1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_Feature_Application">
+          <End Role="Application" Type="Self.Application" Multiplicity="0..1" />
+          <End Role="Feature" Type="Self.Feature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Feature">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Application">
+          <End Role="Application" Type="Self.Application" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Assignee">
+          <End Role="Assignee" Type="Self.Assignee" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignee">
+              <PropertyRef Name="AssigneeID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="AssigneeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Feature">
+          <End Role="Feature" Type="Self.Feature" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feature">
+              <PropertyRef Name="FeatureID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Status1">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SupportDeskDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="Applications" EntityType="Self.Application" />
+          <EntitySet Name="Assignees" EntityType="Self.Assignee" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Exceptions" EntityType="Self.Exception" />
+          <EntitySet Name="Features" EntityType="Self.Feature" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+          <EntitySet Name="TicketsDUMPs" EntityType="Self.TicketsDUMP" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+          <AssociationSet Name="FK_Feature_Application" Association="Self.FK_Feature_Application">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="Feature" EntitySet="Features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Application" Association="Self.FK_Ticket_Application">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Assignee" Association="Self.FK_Ticket_Assignee">
+            <End Role="Assignee" EntitySet="Assignees" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Customer" Association="Self.FK_Ticket_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Feature" Association="Self.FK_Ticket_Feature">
+            <End Role="Feature" EntitySet="Features" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Status1" Association="Self.FK_Ticket_Status1">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SupportDeskModelStoreContainer" CdmEntityContainer="SupportDeskDBContext">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="SupportDeskModel.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="GovernmentID" ColumnName="GovernmentID" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="SecondaryMobileNumber" ColumnName="SecondaryMobileNumber" />
+                <ScalarProperty Name="LandlineNumber" ColumnName="LandlineNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="SupportDeskModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="Application1" ColumnName="Application" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assignees">
+            <EntityTypeMapping TypeName="SupportDeskModel.Assignee">
+              <MappingFragment StoreEntitySet="Assignee">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
+                <ScalarProperty Name="AssigneeName" ColumnName="AssigneeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="SupportDeskModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="GovernmentID" ColumnName="GovernmentID" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="SecondaryMobileNumber" ColumnName="SecondaryMobileNumber" />
+                <ScalarProperty Name="LandlineNumber" ColumnName="LandlineNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exceptions">
+            <EntityTypeMapping TypeName="SupportDeskModel.Exception">
+              <MappingFragment StoreEntitySet="Exception">
+                <ScalarProperty Name="Exception1" ColumnName="Exception" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExceptionID" ColumnName="ExceptionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="SupportDeskModel.Feature">
+              <MappingFragment StoreEntitySet="Feature">
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="Feature1" ColumnName="Feature" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="SupportDeskModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleOnwerID" ColumnName="RoleOnwerID" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="SupportDeskModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Status1" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SupportDeskModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="SupportDeskModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="TicketTitle" ColumnName="TicketTitle" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Assignee" ColumnName="Assignee" />
+                <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
+                <ScalarProperty Name="SubmitDateTime" ColumnName="SubmitDateTime" />
+                <ScalarProperty Name="UserQuery" ColumnName="UserQuery" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+                <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketsDUMPs">
+            <EntityTypeMapping TypeName="SupportDeskModel.TicketsDUMP">
+              <MappingFragment StoreEntitySet="TicketsDUMP">
+                <ScalarProperty Name="IncidentId" ColumnName="IncidentId" />
+                <ScalarProperty Name="TicketTitle" ColumnName="TicketTitle" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Assignee" ColumnName="Assignee" />
+                <ScalarProperty Name="SubmitDateTime" ColumnName="SubmitDateTime" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FiscalMonth" ColumnName="FiscalMonth" />
+                <ScalarProperty Name="UserQuery" ColumnName="UserQuery" />
+                <ScalarProperty Name="WhatAskGMMFeatureDoesYourQuestionPertainTo_" ColumnName="WhatAskGMMFeatureDoesYourQuestionPertainTo?" />
+                <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="SupportDeskModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="UserType1" ColumnName="UserType" />
+                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

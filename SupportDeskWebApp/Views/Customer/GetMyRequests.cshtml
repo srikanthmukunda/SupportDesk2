@@ -1,0 +1,277 @@
+﻿@model SupportDeskWebApp.Models.Ticket
+    @using SupportDesk
+
+@{
+    ViewBag.Title = "GetMyRequests";
+    var dal = new SupportDeskRepository();
+
+    List<SelectListItem> ApplicationList = new List<SelectListItem>();
+
+    var applicationList = dal.GetApplicationList();
+
+    foreach (var appObj in applicationList)
+    {
+        ApplicationList.Add(new SelectListItem
+        {
+            Text = appObj.Application1.ToString(),
+            Value = appObj.ApplicationId.ToString()
+        });
+    }
+
+    List<SelectListItem> StatusList = new List<SelectListItem>();
+
+    var statusList = dal.GetStatusList();
+
+    foreach (var appObj in statusList)
+    {
+        StatusList.Add(new SelectListItem
+        {
+            Text = appObj.Status1.ToString(),
+            Value = appObj.StatusID.ToString()
+        });
+    }
+}
+
+
+
+<div class="tablecontainer" style="width:90%; margin:0 auto;">
+    <a class="popup" href="/Customer/SaveRequest/0" style="margin-bottom:20px; margin-top:20px;"><b><span class="glyphicon glyphicon-plus"></span>Create Request</b></a>
+    <div id="accordion">
+        <div class="group">
+            <h3><b>Filters</b></h3>
+
+            <div>
+                
+                <label><input type="text" id="txtAssigneeName" class="form-control" placeholder="Assignee Name" /></label>
+                <label>
+                    @Html.DropDownList("ddlApplication", ApplicationList, "--Application Name--", new { id = "ddlApplication", name = "ddlApplication", style = "width:200px;", @class = "form-control" })</label>
+                <label>@Html.DropDownList("ddlStatus", StatusList, "--Status--", new { id = "ddlStatus", name = "ddlStatus", style = "width:200px;", @class = "form-control" })</label>
+    @*<label><input type="button" class="form-control" value="Search" id="btnSearch" /></label>*@
+</div>
+            </div>
+        </div>
+        <div>
+            <table id="myTable" class="table table-bordered  table-hover display table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Status</th>
+                        <th>Submitted Date</th>
+                        <th>Assignee</th>
+                        <th>Application ID</th>
+                        <th>Edit</th>
+                        <th>View/Close</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+    
+       .ui-autocomplete {
+    max-height: 150px;
+   
+    overflow-y: auto;
+    
+    overflow-x: hidden;
+  }
+        
+       * html .ui-autocomplete {
+    height: 150px;
+    
+  }
+        .showHideColumn {
+            cursor: pointer;
+            color:#337ab7;
+        }
+        td.portlet-header {
+            background: url('../../Content/img/details_open.png') no-repeat center center;
+            
+            cursor: pointer;
+        }
+        tr.shown td.portlet-header {
+            background: url('../../Content/img/download.png') no-repeat center center;
+           
+        }
+
+        span.field-validation-error {
+            color: red;
+        }
+  
+</style>
+<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section Scripts{
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            var oTable= $('#myTable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "orderMulti": false,
+                "dom": '<"top"i>rt<"bottom"lp><"clear">',
+                "ajax": {
+                    "url": "/Customer/GetRequests",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns" : [
+                        { "data": "IncidentID", "name": "IncidentID", "autoWidth": true  },
+                        { "data": "StatusID", "name": "StatusID", "autoWidth": true },
+                        { "data": "SubmitDateTime", "name": "SubmitDateTime", "autoWidth": true },
+                        { "data": "Assignee", "name": "Assignee", "autoWidth": true },
+                        { "data": "ApplicationID", "name": "ApplicationID", "autoWidth": true },
+                        {
+                            "data": "IncidentID", "width": "50px", "render": function (data) {
+                                return '<a class="popup" href="/customer/SaveRequest/' + data + '"><span class="glyphicon glyphicon-edit"></span></a>';
+                            }, "orderable":false
+                        },
+                    {
+                        "data": "IncidentID", "width": "50px", "render": function (data) {
+                            return '<a class="popup" href="/customer/Delete/' + data + '"><span class="glyphicon glyphicon-trash"></span></a>';
+                        }, "orderable": false
+                    }
+                ]                
+            });
+
+            
+            $('#ddlApplication').on('keyup change', function () {
+                oTable.columns(4).search($('#ddlApplication').val().trim()).draw();
+                //autoComplete();
+            });
+            $('#ddlStatus').on('keyup change', function () {
+                oTable.columns(1).search($('#ddlStatus').val().trim()).draw();
+                //autoComplete();
+            });
+            $('#txtAssigneeName').on('keyup change', function () {
+                oTable.columns(3).search($('#txtAssigneeName').val().trim()).draw();
+                
+            });
+            $('.tablecontainer').on('click', 'a.popup', function (e) {
+                e.preventDefault();
+                OpenPopup($(this).attr('href'));
+            })
+            function OpenPopup(pageUrl) {
+                var $pageContent = $('<div/>');
+                $pageContent.load(pageUrl, function () {
+                    $('#popupForm', $pageContent).removeData('validator');
+                    $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse('form');
+                });
+
+                $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                          .html($pageContent)
+                          .dialog({
+                              draggable: true,
+                              autoOpen: false,
+                              resizable: true,
+                              model: true,
+                              title: 'SupportDesk',
+                              height: 550,
+                              width: 500,
+                              close: function () {
+                                  $dialog.dialog('destroy').remove();
+                              }
+                          })
+                $('.popupWindow').on('submit', '#popupForm', function (e) {
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $dialog.dialog('close');
+                                oTable.ajax.reload();
+                            }
+                        }
+                    })
+
+                    e.preventDefault();
+                })
+                $dialog.dialog('open');
+            }
+        });
+
+        $(function () {
+            var icons = {
+                header: "ui-icon-circle-arrow-e",
+                activeHeader: "ui-icon-circle-arrow-s"
+            };
+            $("#accordion")
+              .accordion({
+                  header: "> div > h3",
+                  collapsible: true,
+                  width: "50%",
+                  icons: icons
+              })
+              .sortable({
+                  axis: "y",
+                  handle: "h3",
+                  stop: function (event, ui) {
+                      // IE doesn't register the blur when sorting
+                      // so trigger focusout handlers to remove .ui-state-focus
+                      ui.item.children("h3").triggerHandler("focusout");
+
+                      // Refresh accordion to handle new order
+                      $(this).accordion("refresh");
+                  }
+              });
+
+            autoComplete();
+            
+        });
+        var names = [];
+        var elemAutocomplete = '';
+        function autoComplete() {
+            names = []
+
+            $.ajax({
+                type: "GET",
+                url: "/Customer/GetAssigneeNamesForCustomer/",
+                //data: { 'testSuiteId': $('#ddlTstsuite').val() != '' ? $('#ddlTstsuite').val() : 0, 'pplStageId': $('#ddlPplStage').val() != '' ? $('#ddlPplStage').val() : 0, 'tstTypeId': $('#ddlTstcsType').val() != '' ? $('#ddlTstcsType').val() : 0 },
+                success: function (result) {
+                    $.each(result, function (i, v) {
+                        names.push(v);
+                    })
+
+
+                },
+                error: function (error) {
+                    alert('failed');
+                }
+            })
+            var $elem = $("#txtAssigneeName").autocomplete({
+                source: function (request, response) {
+                    var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                    response($.grep(names[0], function (value) {
+
+                        return matcher.test(value);
+                    }));
+                }
+
+            })
+            //elemAutocomplete = $elem.data("ui-autocomplete") || $elem.data("autocomplete");
+            //if (elemAutocomplete) {
+            //    elemAutocomplete._renderItem = function (ul, item) {
+            //        var newText = String(item.value).replace(
+            //                new RegExp(this.term, "gi"),
+            //                "<span style='font-weight:bold;color:Blue;'>$&</span>");
+
+            //        return $("<li></li>")
+            //            .data("item.autocomplete", item)
+            //            .append("<p>" + newText + "</p>")
+            //            .appendTo(ul);
+            //    };
+            //}
+
+
+        }
+    </script>
+
+
+}

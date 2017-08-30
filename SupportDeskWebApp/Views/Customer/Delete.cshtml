@@ -1,0 +1,33 @@
+﻿@model SupportDeskWebApp.Models.Ticket
+
+
+@using (Html.BeginForm("delete", "customer", FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.HiddenFor(a => a.IncidentID)
+    <div class="form-group">
+        <label>Title</label>
+        <p>@Model.TicketTitle</p>
+    </div>
+    <div class="form-group">
+        <label>Status</label>
+        <p>@ViewBag.Status</p>
+    </div>
+    <div class="form-group">
+        <label>Assignee</label>
+        <p>@Model.Assignee</p>
+    </div>
+    <div class="form-group">
+        <label>Query</label>
+        <p>@Model.UserQuery</p>
+    </div>
+    <div class="form-group">
+        <label>Application</label>
+        <p>@ViewBag.Application</p>
+    </div>
+
+    <div>
+        <input type="submit" value="Close" />
+    </div>
+}
+
+
