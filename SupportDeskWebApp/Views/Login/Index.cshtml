@@ -73,53 +73,62 @@
                     <h3><b>Sign Up</b></h3>
                     <h4>We are avalible 24x7 to support you.</h4>
                     @using (Html.BeginForm())
-                {
+                    {
+                        <div class="col-md-6">
 
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="UserName" placeholder="First Name" required="" autofocus="" />
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="UserName" placeholder="First Name" required="" autofocus="" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="LastName" placeholder="Last Name" />
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.TextArea("Address", new { @class = "form-control", @placeholder = "Address", @style="width:150px;height:83px;" })
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Mobile" placeholder="Mobile No:" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="UserEmailId" id="UserEmailId" placeholder="Email Id" required="" onchange="checkExistingEmailId();" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="UserPassword" id="UserPassword" placeholder="Password" required="" />
+                            </div>
+                            
+                            
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="MiddleName" placeholder="Middle Name" />
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="MiddleName" placeholder="Middle Name" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Gender" placeholder="Gender: Male/Female" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="GovernmentID" placeholder="GovernmentID" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Mobile2" placeholder="Secondary Mobile:" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Landline" placeholder="Landline:" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="ConfirmUserEmailId" id="ConfirmUserEmailId" placeholder="Confirm Email Id" required="" onchange="emailIdMatch();" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="ConfirmUserPassword" id="ConfirmUserPassword" placeholder="Confirm Password" required="" onchange="passwordMatch();" />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="LastName" placeholder="Last Name" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="Gender" placeholder="Gender: Male/Female" />
-                        </div>
-                        <div class="form-group">
-                            @Html.TextArea("Address", new { @class = "form-control", @placeholder = "Address" })
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="GovernmentID" placeholder="GovernmentID" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="Mobile" placeholder="Mobile No:" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="Mobile2" placeholder="Secondary Mobile No:" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="Landline" placeholder="Landline No:" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="UserEmailId" id="UserEmailId" placeholder="Email Id" required="" onchange="checkExistingEmailId();" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="ConfirmUserEmailId" id="ConfirmUserEmailId" placeholder="Re-enter Email Id" required="" onchange="emailIdMatch();" />
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" name="UserPassword" id="UserPassword" placeholder="Password" required="" />
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" name="ConfirmUserPassword" id="ConfirmUserPassword" placeholder="Re-enter Password" required="" onchange="passwordMatch();" />
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Creat an Account</button>
+                        <div class="form-group" style="padding-left:100px;">
+                            <button  class="btn btn-primary" type="submit">Creat an Account</button>
                         </div>
 
-
-                        }
+                    }
                             @Html.Hidden("viewbagmsg", (string)ViewBag.Msg)
                         </div>
             </div>
