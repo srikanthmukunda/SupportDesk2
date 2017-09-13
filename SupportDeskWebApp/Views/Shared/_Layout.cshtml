@@ -83,6 +83,12 @@
             background-color: #355667;
             text-align: center;
         }
+                #login-dp {
+            min-width: 100px;
+            padding: 14px 14px 0;
+            overflow: hidden;
+            background-color: #C9D7E0;
+        }
     </style>
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -116,12 +122,26 @@
                     @*<li class="option">@Html.ActionLink("", "", "", new { area = "" }, new { @class = "nav-defined-by-us" })</li>*@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        @if (Session["LoginId"] != null)
-                        {
-                            @Html.ActionLink("Log Out", "LogOut", "Login", new { area = "" }, new { @class = "navbar-brand navbar-right" });
-                        }
-                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>@Session["LoginId"]</b> <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                
+                                    <div class="col-md-10">
+
+                                        @if (Session["LoginId"] != null)
+                                        {
+                                            <div class="row">
+                                                @Html.ActionLink("EditDetails", "EditMyDetails", "Customer", new { area = "" }, new { @class = "navbar-brand navbar-right" })
+                                                @Html.ActionLink("LogOut", "LogOut", "Login", new { area = "" }, new { @class = "navbar-brand navbar-right" })
+                                                </div>
+                                        }
+                                                </div>
+                                    
+</li>
+</ul>
+                           
+</li>
                 </ul>
             </div>
         </div>

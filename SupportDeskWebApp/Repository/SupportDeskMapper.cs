@@ -19,6 +19,8 @@ namespace SupportDeskWebApp.Repository
             Mapper.CreateMap<Status, Models.Status>();
             Mapper.CreateMap<Models.Application, Application>();
             Mapper.CreateMap<Application, Models.Application>();
+            Mapper.CreateMap<Models.Customer, Customer>();
+            Mapper.CreateMap<Customer, Models.Customer>();
         }
         public M Translate(E obj)
         {

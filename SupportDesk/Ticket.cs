@@ -14,10 +14,16 @@ namespace SupportDesk
     
     public partial class Ticket
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Ticket()
+        {
+            this.TicketComments = new HashSet<TicketComment>();
+        }
+    
         public string TicketTitle { get; set; }
         public int StatusID { get; set; }
         public string Assignee { get; set; }
-        public int AssigneeID { get; set; }
+        public Nullable<int> AssigneeID { get; set; }
         public string SubmitDateTime { get; set; }
         public string UserQuery { get; set; }
         public Nullable<int> FeatureID { get; set; }
@@ -32,5 +38,7 @@ namespace SupportDesk
         public virtual Customer Customer { get; set; }
         public virtual Feature Feature { get; set; }
         public virtual Status Status { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TicketComment> TicketComments { get; set; }
     }
 }

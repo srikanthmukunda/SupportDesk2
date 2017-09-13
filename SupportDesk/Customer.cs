@@ -27,7 +27,7 @@ namespace SupportDesk
         public string Address { get; set; }
         public string GovernmentID { get; set; }
         public Nullable<System.DateTime> JoinDate { get; set; }
-        public Nullable<int> MobileNumber { get; set; }
+        public string MobileNumber { get; set; }
         public string SecondaryMobileNumber { get; set; }
         public string LandlineNumber { get; set; }
         public string Email { get; set; }

@@ -1,0 +1,32 @@
+﻿@using Telerik.Web.Mvc.UI;
+@model IEnumerable<SupportDeskWebApp.Models.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+@(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.windows7.css").Combined(true).Compress(true)))
+@{
+    Html.Telerik().Grid(Model)
+        .Name("MyGrid")
+        .Columns(col =>
+        {
+            col.Bound(o => o.FirstName).Width(120).Groupable(false);
+            col.Bound(o => o.LastName).Width(120).Groupable(false);
+            col.Bound(o => o.Gender).Groupable(true);
+            col.Bound(o => o.Email).Groupable(false); 
+            col.Bound(o => o.JoinDate).Groupable(false);
+        })
+        .Pageable(a => a.PageSize(15)) 
+        .Groupable() 
+        .Sortable() 
+        .Filterable() 
+        .Render();
+}
+@* Here We will use telerik grid for show data *@
+
+
+@* Here have to add some css and js for everything work as expected *@
+
+@(Html.Telerik().ScriptRegistrar())

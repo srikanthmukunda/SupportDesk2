@@ -22,10 +22,19 @@
                 success: function (data) {
                     var emailIdElement = document.getElementById('UserEmailId');
                     if (data == 'True') {
+                        //var pattern = "/^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/";
                         emailIdElement.setCustomValidity("");
+                        //if (pattern.test(emailIdElement)) {
+                        //    emailIdElement.setCustomValidity("");
+                        //}
+                        //else
+                        //{
+                        //    emailIdElement.setCustomValidity("Follow the pattern: me@example.com");
+                        //}
+                        
                     }
                     else if (data == 'False') {
-                        alert("Already existing user");
+                        //alert("Already existing user");
                         emailIdElement.setCustomValidity("Already existing user");
                     }
                 },
@@ -79,37 +88,27 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" name="UserName" placeholder="First Name" required="" autofocus="" />
                             </div>
-                            
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="LastName" placeholder="Last Name" />
-                            </div>
-                            
-                            <div class="form-group">
-                                @Html.TextArea("Address", new { @class = "form-control", @placeholder = "Address", @style="width:150px;height:83px;" })
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="Mobile" placeholder="Mobile No:" />
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="UserEmailId" id="UserEmailId" placeholder="Email Id" required="" onchange="checkExistingEmailId();" />
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="password" class="form-control" name="UserPassword" id="UserPassword" placeholder="Password" required="" />
-                            </div>
-                            
-                            
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="MiddleName" placeholder="Middle Name" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="LastName" placeholder="Last Name" />
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="Gender" placeholder="Gender: Male/Female" />
                             </div>
                             <div class="form-group">
+                                @Html.TextArea("Address", new { @class = "form-control", @placeholder = "Address", @style="width:150px;height:83px;" })
+                            </div>
+                            <div class="form-group">
                                 <input type="text" class="form-control" name="GovernmentID" placeholder="GovernmentID" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            
+                            
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Mobile" placeholder="Mobile No:" />
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="Mobile2" placeholder="Secondary Mobile:" />
@@ -118,7 +117,13 @@
                                 <input type="text" class="form-control" name="Landline" placeholder="Landline:" />
                             </div>
                             <div class="form-group">
+                                <input type="text" class="form-control" name="UserEmailId" id="UserEmailId" placeholder="Email Id" required="" onchange="checkExistingEmailId();" />
+                            </div>
+                            <div class="form-group">
                                 <input type="text" class="form-control" name="ConfirmUserEmailId" id="ConfirmUserEmailId" placeholder="Confirm Email Id" required="" onchange="emailIdMatch();" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="UserPassword" id="UserPassword" placeholder="Password" required="" />
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="ConfirmUserPassword" id="ConfirmUserPassword" placeholder="Confirm Password" required="" onchange="passwordMatch();" />

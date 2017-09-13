@@ -4,25 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="60c7e688209740559ac5c9aac2957e13" Name="Diagram1">
+      <Diagram DiagramId="2a334006f0314329b0b3e89f638f3ed5" Name="Diagram1">
+        <EntityTypeShape EntityType="SupportDeskModel.Admin" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SupportDeskModel.Agent" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SupportDeskModel.Application" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SupportDeskModel.Assignee" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SupportDeskModel.Customer" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SupportDeskModel.Exception" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SupportDeskModel.Feature" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SupportDeskModel.Role" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SupportDeskModel.Status" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SupportDeskModel.sysdiagram" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupportDeskModel.Assignee" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupportDeskModel.Customer" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupportDeskModel.Exception" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupportDeskModel.Feature" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupportDeskModel.Role" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupportDeskModel.Status" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SupportDeskModel.Ticket" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupportDeskModel.TicketComment" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="SupportDeskModel.TicketsDUMP" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SupportDeskModel.UserType" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="SupportDeskModel.FK__Assignee__AdminI__5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="SupportDeskModel.FK_Feature_Application" ManuallyRouted="false" />
         <AssociationConnector Association="SupportDeskModel.FK_Ticket_Application" ManuallyRouted="false" />
         <AssociationConnector Association="SupportDeskModel.FK_Ticket_Assignee" ManuallyRouted="false" />
         <AssociationConnector Association="SupportDeskModel.FK_Ticket_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="SupportDeskModel.FK_Ticket_Feature" ManuallyRouted="false" />
-        <AssociationConnector Association="SupportDeskModel.FK_Ticket_Status1" ManuallyRouted="false" />
+        <AssociationConnector Association="SupportDeskModel.FK_Ticket_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="SupportDeskModel.FK_TicketComment_Ticket" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -25,6 +25,7 @@ namespace SupportDesk
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<Application> Applications { get; set; }
         public virtual DbSet<Assignee> Assignees { get; set; }
@@ -33,8 +34,8 @@ namespace SupportDesk
         public virtual DbSet<Feature> Features { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Status> Status { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
+        public virtual DbSet<TicketComment> TicketComments { get; set; }
         public virtual DbSet<TicketsDUMP> TicketsDUMPs { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
     }

@@ -36,6 +36,14 @@ namespace SupportDesk
                     result = agent.AgentId;
                 }
             }
+            else if (loginId[0] == '6')
+            {
+                Admin admin = FetchAdminDetail(Convert.ToInt32(id));
+                if (admin != null && admin.AdminPassword == password)
+                {
+                    result = admin.AdminID;
+                }
+            }
             else
             {
                 Customer cd = FetchCustomerDetail(id);
@@ -46,7 +54,19 @@ namespace SupportDesk
             }
             return result.ToString();
         }
-
+        public Admin FetchAdminDetail(int adminId)
+        {
+            Admin result;
+            try
+            {
+                result = Context.Admins.Where(x => x.AdminID == adminId).First<Admin>();
+            }
+            catch (System.Exception e)
+            {
+                result = null;
+            }
+            return result;
+        }
         public Assignee FetchAssigneeDetail(int assigneeId)
         {
             Assignee result;
@@ -80,7 +100,11 @@ namespace SupportDesk
             Customer cd;
             try
             {
-                int custID = Convert.ToInt32(customerId);
+                int custID = 0;
+                if(customerId[0]=='2')
+                {
+                    custID = Convert.ToInt32(customerId);
+                }
                 cd = Context.Customers.Where(x => x.CustomerID == custID || x.Email == customerId).First();
             }
             catch (System.Exception e)
@@ -97,6 +121,12 @@ namespace SupportDesk
             return ticketList;
         }
 
+        public List<Ticket> GetTicketsForAssignee(int assigneeId)
+        {
+            var ticketList = Context.Tickets.Where(a => a.AssigneeID == assigneeId).ToList();
+            return ticketList;
+        }
+
         public List<Application> GetApplicationList()
         {
             List<Application> applicationList = new List<Application>();
@@ -107,6 +137,10 @@ namespace SupportDesk
         public List<Status> GetStatusList()
         {
             return Context.Status.ToList();
+        }
+        public List<Customer> GetCustomerList()
+        {
+            return Context.Customers.ToList();
         }
 
         public List<Assignee> GetAssigneeList()
@@ -178,6 +212,36 @@ namespace SupportDesk
             return status;
         }
 
-        
+        public int RegisterCustomer(Customer customer)
+        {
+            Context.Customers.Add(customer);
+            Context.SaveChanges();
+            int id = Context.Customers.Where(a => a.Email == customer.Email).Select(a => a.CustomerID).First();
+            return id;
+        }
+
+        public bool CheckValidEmailId(string EmailId)
+        {
+            bool result;
+            try
+            {
+                Customer cd = Context.Customers.Where(x => x.Email == EmailId).FirstOrDefault();
+                if (cd == null)
+                {
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+            }
+            catch (System.Exception)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+
     }
 }

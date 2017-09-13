@@ -23,7 +23,9 @@ namespace SupportDesk
         public int AssigneeID { get; set; }
         public string AssigneeName { get; set; }
         public string Password { get; set; }
+        public Nullable<int> AdminId { get; set; }
     
+        public virtual Admin Admin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Tickets { get; set; }
     }

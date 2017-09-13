@@ -17,6 +17,10 @@ namespace SupportDeskWebApi.Repository
         {
             Mapper.CreateMap<Models.Ticket, Ticket>();
             Mapper.CreateMap<Ticket, Models.Ticket>();
+            Mapper.CreateMap<Models.Customer, Customer>();
+            Mapper.CreateMap<Customer, Models.Customer>();
+            Mapper.CreateMap<Models.Assignee, Assignee>();
+            Mapper.CreateMap<Assignee, Models.Assignee>();
         }
         public M Translate(E obj)
         {

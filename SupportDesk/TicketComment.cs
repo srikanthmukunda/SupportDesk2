@@ -12,12 +12,16 @@ namespace SupportDesk
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class TicketComment
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int TicketCommentId { get; set; }
+        public int TicketId { get; set; }
+        public string PerformedBy { get; set; }
+        public int Action { get; set; }
+        public string ActionDate { get; set; }
+        public string TimeSpent { get; set; }
+        public string TicketComment1 { get; set; }
+    
+        public virtual Ticket Ticket { get; set; }
     }
 }

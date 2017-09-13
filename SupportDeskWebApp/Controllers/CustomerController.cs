@@ -245,5 +245,33 @@ namespace SupportDeskWebApp.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
+        [HttpGet]
+        public ActionResult EditMyDetails()
+        {
+            if (Session["LoginId"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            Models.Customer mCustomer = new Models.Customer();
+            int custID = Convert.ToInt32(Session["LoginId"]);
+            try
+            {
+                SupportDeskMapper<Customer, Models.Customer> mapper = new SupportDeskMapper<Customer, Models.Customer>();
+
+                var customer = dal.FetchCustomerDetail(custID.ToString());
+                if (customer != null)
+                {
+                    mCustomer = mapper.Translate(customer);
+                }
+
+
+            }
+            catch (System.Exception e)
+            {
+
+            }
+            
+            return View(mCustomer);
+        }
     }
 }

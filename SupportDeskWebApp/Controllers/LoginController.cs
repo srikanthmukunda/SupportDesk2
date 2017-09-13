@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SupportDesk;
+using SupportDeskWebApp.Repository;
 
 namespace SupportDeskWebApp.Controllers
 {
@@ -28,21 +29,26 @@ namespace SupportDeskWebApp.Controllers
                 {
                     if (loginId[0] == '2')
                     {
-                        //Session["Role"] = "Customer";
+                        
                         Session["LoginId"] = loginId;
                         return Redirect("/Customer/Index/");
                     }
                     else if (loginId[0] == '1')
                     {
-                        //Session["Role"] = "Admin";
+                        
                         Session["LoginId"] = loginId;
                         return Redirect("/Assignee/Index/");
                     }
                     else if (loginId[0] == '4')
                     {
-                        //Session["Role"] = "Staff";
+                       
                         Session["LoginId"] = loginId;
                         return Redirect("/Staff/ViewDashboard/");
+                    }
+                    else if (loginId[0] == '6')
+                    {                       
+                        Session["LoginId"] = loginId;
+                        return Redirect("/Admin/Index/");
                     }
                     else
                     {
@@ -58,11 +64,26 @@ namespace SupportDeskWebApp.Controllers
             }
             else if (frm["UserName"] != null && frm["UserEmailId"] != null && frm["UserPassword"] != null)
             {
-                string id = null; /*dalObj.AddCustomerDetail(frm["UserName"], frm["UserEmailId"], frm["UserPassword"]);*/
+                
+                Models.Customer customer = new Models.Customer();
+                customer.FirstName = frm["UserName"].ToString();
+                customer.MiddleName= frm["MiddleName"].ToString();
+                customer.LastName = frm["LastName"].ToString();
+                customer.Gender= frm["Gender"].ToString();
+                customer.GovernmentID = frm["GovernmentID"].ToString();
+                customer.JoinDate = DateTime.Now;
+                customer.MobileNumber = frm["Mobile"].ToString();
+                customer.SecondaryMobileNumber = frm["Mobile2"].ToString();
+                customer.LandlineNumber = frm["Landline"].ToString();
+                customer.Email = frm["UserEmailId"].ToString();
+                customer.Password = frm["UserPassword"].ToString();
+                SupportDeskMapper<Models.Customer, Customer> mapper = new SupportDeskMapper<Models.Customer, Customer>();
+                var newCustomer = mapper.Translate(customer);
+                string id = dalObj.RegisterCustomer(newCustomer).ToString();
                 if (id != null)
                 {
                     Session["LoginId"] = id;
-                    return Redirect("/Customer/CreateRequest/");
+                    return Redirect("/Customer/Index/");
                 }
                 else
                 {
@@ -76,6 +97,12 @@ namespace SupportDeskWebApp.Controllers
                 return View();
             }
         }
+        [HttpPost]
+        public bool CheckValidEmailId(string EmailId)
+        {            
+            return dalObj.CheckValidEmailId(EmailId);
+        }
+        
         public ActionResult LogOut()
         {
             Session.Clear();
